@@ -9,7 +9,13 @@ export function useStored(key, initial) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(key);
-      if (raw !== null) setValue(JSON.parse(raw));
+      if (raw !== null) {
+        const parsed = JSON.parse(raw);
+        // กันค่าเก่าที่ชนิดไม่ตรงกับค่าเริ่มต้น
+        if (Array.isArray(initial) ? Array.isArray(parsed) : parsed !== null && parsed !== undefined) {
+          setValue(parsed);
+        }
+      }
     } catch {}
     setReady(true);
   }, [key]);

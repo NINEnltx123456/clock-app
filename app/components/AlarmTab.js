@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { beep, unlockAudio } from "../lib/sound";
 
-export default function AlarmTab({ alarms, setAlarms, card, primary }) {
+export default function AlarmTab({ alarms = [], setAlarms, card, primary }) {
+
   const [time, setTime] = useState("07:00");
   const [label, setLabel] = useState("");
 
